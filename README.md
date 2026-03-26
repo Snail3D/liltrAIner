@@ -163,9 +163,29 @@ huggingface-cli upload yourname/model-name ./fused_model
 python -m mlx_lm convert --model ./fused_model --to-gguf -q Q4_K_M
 ```
 
+## Cloud Fine-Tuning (Fireworks)
+
+liltrAIner training data (ChatML JSONL) works directly with [Fireworks AI](https://fireworks.ai) for cloud fine-tuning. Tested with Kimi K2.5 (1000B MoE):
+
+```bash
+# Upload dataset
+curl -X POST "https://api.fireworks.ai/v1/accounts/ACCOUNT/datasets" \
+  -H "Authorization: Bearer $FW_KEY" \
+  -d '{"datasetId":"my-data","dataset":{"userUploaded":{}}}'
+
+curl -X POST "https://api.fireworks.ai/v1/accounts/ACCOUNT/datasets/my-data:upload" \
+  -H "Authorization: Bearer $FW_KEY" \
+  -F "file=@data/train.jsonl"
+
+# Launch SFT job
+curl -X POST "https://api.fireworks.ai/v1/accounts/ACCOUNT/supervisedFineTuningJobs" \
+  -H "Authorization: Bearer $FW_KEY" \
+  -d '{"baseModel":"accounts/fireworks/models/kimi-k2p5","dataset":"accounts/ACCOUNT/datasets/my-data","outputModel":"accounts/ACCOUNT/models/my-model","epochs":2,"learningRate":2e-5,"loraRank":16,"maxContextLength":4096}'
+```
+
 ## Credits
 
-Inspired by [Karpathy's autoresearch](https://github.com/karpathy/autoresearch). Built for Apple Silicon with [MLX](https://github.com/ml-explore/mlx).
+Inspired by [Karpathy's autoresearch](https://github.com/karpathy/autoresearch). Built for Apple Silicon with [MLX](https://github.com/ml-explore/mlx). Cloud fine-tuning via [Fireworks AI](https://fireworks.ai).
 
 ## License
 
