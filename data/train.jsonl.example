@@ -1,0 +1,2 @@
+{"messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "dark mode"}, {"role": "assistant", "content": "Done!\n\n```tc-action\n{\"type\":\"config\",\"themeMode\":\"dark\"}\n```"}]}
+{"messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "hello"}, {"role": "assistant", "content": "Hey! What can I help you with?"}]}

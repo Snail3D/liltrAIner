@@ -1,0 +1,6 @@
+fine_tune_type: lora
+lora_parameters:
+  rank: 4
+  alpha: 8
+  dropout: 0.0
+  scale: 2.0

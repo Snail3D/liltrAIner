@@ -1,0 +1,12 @@
+adapters/
+fused_model/
+__pycache__/
+*.pyc
+.venv/
+experiment_log.jsonl
+best_config.json
+status.json
+data/train.jsonl
+data/valid.jsonl
+/tmp/
+*.log
